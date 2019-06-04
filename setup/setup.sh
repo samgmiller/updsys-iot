@@ -40,12 +40,12 @@ printf "${NC}"
 fi 
 
 # get user REG_NAME input
-read -p 'Choose an IoT Core registry name (return for PIC-IOT): ' REG_NAME
+read -p 'Choose an IoT Core registry name (return for uPDSys): ' REG_NAME
 ATTEMPT=$((ATTEMPT + 1))
 
 # set to default if no text entered
 if [ "$REG_NAME" = "" ]; then
-  REG_NAME="PIC-IOT"
+  REG_NAME="uPDSys"
 fi
 
 # strip white space
@@ -60,10 +60,10 @@ firebase use $GOOGLE_CLOUD_PROJECT
 gcloud services enable cloudfunctions.googleapis.com cloudiot.googleapis.com pubsub.googleapis.com
 
 # create pubsub topic
-gcloud pubsub topics create pic-iot
+gcloud pubsub topics create updsys
 
 # create IoT core device registry
-gcloud iot registries create $REG_NAME --region=$CLOUD_REGION --event-notification-config=topic=pic-iot
+gcloud iot registries create $REG_NAME --region=$CLOUD_REGION --event-notification-config=topic=updsys
 
 # add device to registry
 printf "\n${BLU}Creating IoT core registry ${REG_NAME}${NC}"
